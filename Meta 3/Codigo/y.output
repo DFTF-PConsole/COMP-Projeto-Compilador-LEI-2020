@@ -1,0 +1,2524 @@
+Terminais não usados na gramática
+
+    RESERVED
+
+
+Gramática
+
+    0 $accept: Start $end
+
+    1 Start: FunctionsAndDeclarations
+
+    2 FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition
+    3                         | FunctionsAndDeclarations FunctionDeclaration
+    4                         | FunctionsAndDeclarations Declaration
+    5                         | FunctionsAndDeclarations error SEMI
+    6                         | FunctionDefinition
+    7                         | FunctionDeclaration
+    8                         | Declaration
+    9                         | error SEMI
+
+   10 FunctionDefinition: TypeSpec ID LPAR ParameterList RPAR FunctionBody
+
+   11 FunctionBody: LBRACE DeclarationsAndStatements RBRACE
+   12             | LBRACE RBRACE
+
+   13 DeclarationsAndStatements: DeclarationsAndStatements Declaration
+   14                          | DeclarationsAndStatements Statement
+   15                          | Statement
+   16                          | Declaration
+
+   17 FunctionDeclaration: TypeSpec ID LPAR ParameterList RPAR SEMI
+
+   18 ParameterList: ParameterDeclaration
+   19              | ParameterList COMMA ParameterDeclaration
+
+   20 ParameterDeclaration: TypeSpec
+   21                     | TypeSpec ID
+
+   22 Declaration: TypeSpec DeclaratorList SEMI
+   23            | TypeSpec error SEMI
+
+   24 DeclaratorList: Declarator
+   25               | DeclaratorList COMMA Declarator
+
+   26 TypeSpec: CHAR
+   27         | INT
+   28         | VOID
+   29         | SHORT
+   30         | DOUBLE
+
+   31 Declarator: ID ASSIGN Expr
+   32           | ID
+
+   33 Statement: Expr SEMI
+   34          | SEMI
+   35          | LBRACE StatementList RBRACE
+   36          | LBRACE RBRACE
+   37          | IF LPAR Expr RPAR Statement
+   38          | IF LPAR Expr RPAR Statement ELSE Statement
+   39          | WHILE LPAR Expr RPAR Statement
+   40          | RETURN Expr SEMI
+   41          | RETURN SEMI
+   42          | LBRACE error RBRACE
+   43          | error SEMI
+
+   44 StatementList: StatementList Statement
+   45              | Statement
+
+   46 Expr: INTLIT
+   47     | CHRLIT
+   48     | REALLIT
+   49     | PLUS Expr
+   50     | MINUS Expr
+   51     | NOT Expr
+   52     | ID
+   53     | ID LPAR RPAR
+   54     | CallParameters RPAR
+   55     | ID LPAR error RPAR
+   56     | LPAR Expr RPAR
+   57     | LPAR error RPAR
+   58     | Expr ASSIGN Expr
+   59     | Expr COMMA Expr
+   60     | Expr PLUS Expr
+   61     | Expr MINUS Expr
+   62     | Expr MUL Expr
+   63     | Expr DIV Expr
+   64     | Expr MOD Expr
+   65     | Expr OR Expr
+   66     | Expr AND Expr
+   67     | Expr BITWISEAND Expr
+   68     | Expr BITWISEOR Expr
+   69     | Expr BITWISEXOR Expr
+   70     | Expr EQ Expr
+   71     | Expr NE Expr
+   72     | Expr LE Expr
+   73     | Expr GE Expr
+   74     | Expr LT Expr
+   75     | Expr GT Expr
+
+   76 CallParameters: CallParameters COMMA Expr
+   77               | ID LPAR Expr
+
+
+Terminais, com regras onde aparecem
+
+    $end (0) 0
+    error (256) 5 9 23 42 43 55 57
+    CHRLIT <stringValue> (258) 47
+    INTLIT <stringValue> (259) 46
+    REALLIT <stringValue> (260) 48
+    ID <stringValue> (261) 10 17 21 31 32 52 53 55 77
+    VOID (262) 28
+    CHAR (263) 26
+    INT (264) 27
+    SHORT (265) 29
+    DOUBLE (266) 30
+    SEMI (267) 5 9 17 22 23 33 34 40 41 43
+    COMMA (268) 19 25 59 76
+    LBRACE (269) 11 12 35 36 42
+    RBRACE (270) 11 12 35 36 42
+    LPAR (271) 10 17 37 38 39 53 55 56 57 77
+    RPAR (272) 10 17 37 38 39 53 54 55 56 57
+    ASSIGN (273) 31 58
+    PLUS (274) 49 60
+    MINUS (275) 50 61
+    MUL (276) 62
+    DIV (277) 63
+    MOD (278) 64
+    OR (279) 65
+    AND (280) 66
+    BITWISEAND (281) 67
+    BITWISEOR (282) 68
+    BITWISEXOR (283) 69
+    EQ (284) 70
+    NE (285) 71
+    LE (286) 72
+    GE (287) 73
+    LT (288) 74
+    GT (289) 75
+    NOT (290) 51
+    WHILE (291) 39
+    IF (292) 37 38
+    ELSE (293) 38
+    RETURN (294) 40 41
+    RESERVED (295)
+
+
+Não terminais, com regras onde aparecem
+
+    $accept (41)
+        à esquerda: 0
+    Start <program> (42)
+        à esquerda: 1
+        à direita: 0
+    FunctionsAndDeclarations <program> (43)
+        à esquerda: 2 3 4 5 6 7 8 9
+        à direita: 1 2 3 4 5
+    FunctionDefinition <program> (44)
+        à esquerda: 10
+        à direita: 2 6
+    FunctionBody <program> (45)
+        à esquerda: 11 12
+        à direita: 10
+    DeclarationsAndStatements <program> (46)
+        à esquerda: 13 14 15 16
+        à direita: 11 13 14
+    FunctionDeclaration <program> (47)
+        à esquerda: 17
+        à direita: 3 7
+    ParameterList <program> (48)
+        à esquerda: 18 19
+        à direita: 10 17 19
+    ParameterDeclaration <program> (49)
+        à esquerda: 20 21
+        à direita: 18 19
+    Declaration <program> (50)
+        à esquerda: 22 23
+        à direita: 4 8 13 16
+    DeclaratorList <program> (51)
+        à esquerda: 24 25
+        à direita: 22 25
+    TypeSpec <program> (52)
+        à esquerda: 26 27 28 29 30
+        à direita: 10 17 20 21 22 23
+    Declarator <program> (53)
+        à esquerda: 31 32
+        à direita: 24 25
+    Statement <program> (54)
+        à esquerda: 33 34 35 36 37 38 39 40 41 42 43
+        à direita: 14 15 37 38 39 44 45
+    StatementList <program> (55)
+        à esquerda: 44 45
+        à direita: 35 44
+    Expr <program> (56)
+        à esquerda: 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75
+        à direita: 31 33 37 38 39 40 49 50 51 56 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77
+    CallParameters <program> (57)
+        à esquerda: 76 77
+        à direita: 54 76
+
+
+Estado 0
+
+    0 $accept: . Start $end
+
+    error   troca e vai para estado 1
+    VOID    troca e vai para estado 2
+    CHAR    troca e vai para estado 3
+    INT     troca e vai para estado 4
+    SHORT   troca e vai para estado 5
+    DOUBLE  troca e vai para estado 6
+
+    Start                     vai para estado 7
+    FunctionsAndDeclarations  vai para estado 8
+    FunctionDefinition        vai para estado 9
+    FunctionDeclaration       vai para estado 10
+    Declaration               vai para estado 11
+    TypeSpec                  vai para estado 12
+
+
+Estado 1
+
+    9 FunctionsAndDeclarations: error . SEMI
+
+    SEMI  troca e vai para estado 13
+
+
+Estado 2
+
+   28 TypeSpec: VOID .
+
+    $default  redução com regra 28 (TypeSpec)
+
+
+Estado 3
+
+   26 TypeSpec: CHAR .
+
+    $default  redução com regra 26 (TypeSpec)
+
+
+Estado 4
+
+   27 TypeSpec: INT .
+
+    $default  redução com regra 27 (TypeSpec)
+
+
+Estado 5
+
+   29 TypeSpec: SHORT .
+
+    $default  redução com regra 29 (TypeSpec)
+
+
+Estado 6
+
+   30 TypeSpec: DOUBLE .
+
+    $default  redução com regra 30 (TypeSpec)
+
+
+Estado 7
+
+    0 $accept: Start . $end
+
+    $end  troca e vai para estado 14
+
+
+Estado 8
+
+    1 Start: FunctionsAndDeclarations .
+    2 FunctionsAndDeclarations: FunctionsAndDeclarations . FunctionDefinition
+    3                         | FunctionsAndDeclarations . FunctionDeclaration
+    4                         | FunctionsAndDeclarations . Declaration
+    5                         | FunctionsAndDeclarations . error SEMI
+
+    error   troca e vai para estado 15
+    VOID    troca e vai para estado 2
+    CHAR    troca e vai para estado 3
+    INT     troca e vai para estado 4
+    SHORT   troca e vai para estado 5
+    DOUBLE  troca e vai para estado 6
+
+    $end  redução com regra 1 (Start)
+
+    FunctionDefinition   vai para estado 16
+    FunctionDeclaration  vai para estado 17
+    Declaration          vai para estado 18
+    TypeSpec             vai para estado 12
+
+
+Estado 9
+
+    6 FunctionsAndDeclarations: FunctionDefinition .
+
+    $default  redução com regra 6 (FunctionsAndDeclarations)
+
+
+Estado 10
+
+    7 FunctionsAndDeclarations: FunctionDeclaration .
+
+    $default  redução com regra 7 (FunctionsAndDeclarations)
+
+
+Estado 11
+
+    8 FunctionsAndDeclarations: Declaration .
+
+    $default  redução com regra 8 (FunctionsAndDeclarations)
+
+
+Estado 12
+
+   10 FunctionDefinition: TypeSpec . ID LPAR ParameterList RPAR FunctionBody
+   17 FunctionDeclaration: TypeSpec . ID LPAR ParameterList RPAR SEMI
+   22 Declaration: TypeSpec . DeclaratorList SEMI
+   23            | TypeSpec . error SEMI
+
+    error  troca e vai para estado 19
+    ID     troca e vai para estado 20
+
+    DeclaratorList  vai para estado 21
+    Declarator      vai para estado 22
+
+
+Estado 13
+
+    9 FunctionsAndDeclarations: error SEMI .
+
+    $default  redução com regra 9 (FunctionsAndDeclarations)
+
+
+Estado 14
+
+    0 $accept: Start $end .
+
+    $default  aceitar
+
+
+Estado 15
+
+    5 FunctionsAndDeclarations: FunctionsAndDeclarations error . SEMI
+
+    SEMI  troca e vai para estado 23
+
+
+Estado 16
+
+    2 FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition .
+
+    $default  redução com regra 2 (FunctionsAndDeclarations)
+
+
+Estado 17
+
+    3 FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDeclaration .
+
+    $default  redução com regra 3 (FunctionsAndDeclarations)
+
+
+Estado 18
+
+    4 FunctionsAndDeclarations: FunctionsAndDeclarations Declaration .
+
+    $default  redução com regra 4 (FunctionsAndDeclarations)
+
+
+Estado 19
+
+   23 Declaration: TypeSpec error . SEMI
+
+    SEMI  troca e vai para estado 24
+
+
+Estado 20
+
+   10 FunctionDefinition: TypeSpec ID . LPAR ParameterList RPAR FunctionBody
+   17 FunctionDeclaration: TypeSpec ID . LPAR ParameterList RPAR SEMI
+   31 Declarator: ID . ASSIGN Expr
+   32           | ID .
+
+    LPAR    troca e vai para estado 25
+    ASSIGN  troca e vai para estado 26
+
+    $default  redução com regra 32 (Declarator)
+
+
+Estado 21
+
+   22 Declaration: TypeSpec DeclaratorList . SEMI
+   25 DeclaratorList: DeclaratorList . COMMA Declarator
+
+    SEMI   troca e vai para estado 27
+    COMMA  troca e vai para estado 28
+
+
+Estado 22
+
+   24 DeclaratorList: Declarator .
+
+    $default  redução com regra 24 (DeclaratorList)
+
+
+Estado 23
+
+    5 FunctionsAndDeclarations: FunctionsAndDeclarations error SEMI .
+
+    $default  redução com regra 5 (FunctionsAndDeclarations)
+
+
+Estado 24
+
+   23 Declaration: TypeSpec error SEMI .
+
+    $default  redução com regra 23 (Declaration)
+
+
+Estado 25
+
+   10 FunctionDefinition: TypeSpec ID LPAR . ParameterList RPAR FunctionBody
+   17 FunctionDeclaration: TypeSpec ID LPAR . ParameterList RPAR SEMI
+
+    VOID    troca e vai para estado 2
+    CHAR    troca e vai para estado 3
+    INT     troca e vai para estado 4
+    SHORT   troca e vai para estado 5
+    DOUBLE  troca e vai para estado 6
+
+    ParameterList         vai para estado 29
+    ParameterDeclaration  vai para estado 30
+    TypeSpec              vai para estado 31
+
+
+Estado 26
+
+   31 Declarator: ID ASSIGN . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 40
+    CallParameters  vai para estado 41
+
+
+Estado 27
+
+   22 Declaration: TypeSpec DeclaratorList SEMI .
+
+    $default  redução com regra 22 (Declaration)
+
+
+Estado 28
+
+   25 DeclaratorList: DeclaratorList COMMA . Declarator
+
+    ID  troca e vai para estado 42
+
+    Declarator  vai para estado 43
+
+
+Estado 29
+
+   10 FunctionDefinition: TypeSpec ID LPAR ParameterList . RPAR FunctionBody
+   17 FunctionDeclaration: TypeSpec ID LPAR ParameterList . RPAR SEMI
+   19 ParameterList: ParameterList . COMMA ParameterDeclaration
+
+    COMMA  troca e vai para estado 44
+    RPAR   troca e vai para estado 45
+
+
+Estado 30
+
+   18 ParameterList: ParameterDeclaration .
+
+    $default  redução com regra 18 (ParameterList)
+
+
+Estado 31
+
+   20 ParameterDeclaration: TypeSpec .
+   21                     | TypeSpec . ID
+
+    ID  troca e vai para estado 46
+
+    $default  redução com regra 20 (ParameterDeclaration)
+
+
+Estado 32
+
+   47 Expr: CHRLIT .
+
+    $default  redução com regra 47 (Expr)
+
+
+Estado 33
+
+   46 Expr: INTLIT .
+
+    $default  redução com regra 46 (Expr)
+
+
+Estado 34
+
+   48 Expr: REALLIT .
+
+    $default  redução com regra 48 (Expr)
+
+
+Estado 35
+
+   52 Expr: ID .
+   53     | ID . LPAR RPAR
+   55     | ID . LPAR error RPAR
+   77 CallParameters: ID . LPAR Expr
+
+    LPAR  troca e vai para estado 47
+
+    $default  redução com regra 52 (Expr)
+
+
+Estado 36
+
+   56 Expr: LPAR . Expr RPAR
+   57     | LPAR . error RPAR
+
+    error    troca e vai para estado 48
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 49
+    CallParameters  vai para estado 41
+
+
+Estado 37
+
+   49 Expr: PLUS . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 50
+    CallParameters  vai para estado 41
+
+
+Estado 38
+
+   50 Expr: MINUS . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 51
+    CallParameters  vai para estado 41
+
+
+Estado 39
+
+   51 Expr: NOT . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 52
+    CallParameters  vai para estado 41
+
+
+Estado 40
+
+   31 Declarator: ID ASSIGN Expr .
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 31 (Declarator)
+
+
+Estado 41
+
+   54 Expr: CallParameters . RPAR
+   76 CallParameters: CallParameters . COMMA Expr
+
+    COMMA  troca e vai para estado 71
+    RPAR   troca e vai para estado 72
+
+
+Estado 42
+
+   31 Declarator: ID . ASSIGN Expr
+   32           | ID .
+
+    ASSIGN  troca e vai para estado 26
+
+    $default  redução com regra 32 (Declarator)
+
+
+Estado 43
+
+   25 DeclaratorList: DeclaratorList COMMA Declarator .
+
+    $default  redução com regra 25 (DeclaratorList)
+
+
+Estado 44
+
+   19 ParameterList: ParameterList COMMA . ParameterDeclaration
+
+    VOID    troca e vai para estado 2
+    CHAR    troca e vai para estado 3
+    INT     troca e vai para estado 4
+    SHORT   troca e vai para estado 5
+    DOUBLE  troca e vai para estado 6
+
+    ParameterDeclaration  vai para estado 73
+    TypeSpec              vai para estado 31
+
+
+Estado 45
+
+   10 FunctionDefinition: TypeSpec ID LPAR ParameterList RPAR . FunctionBody
+   17 FunctionDeclaration: TypeSpec ID LPAR ParameterList RPAR . SEMI
+
+    SEMI    troca e vai para estado 74
+    LBRACE  troca e vai para estado 75
+
+    FunctionBody  vai para estado 76
+
+
+Estado 46
+
+   21 ParameterDeclaration: TypeSpec ID .
+
+    $default  redução com regra 21 (ParameterDeclaration)
+
+
+Estado 47
+
+   53 Expr: ID LPAR . RPAR
+   55     | ID LPAR . error RPAR
+   77 CallParameters: ID LPAR . Expr
+
+    error    troca e vai para estado 77
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    RPAR     troca e vai para estado 78
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 79
+    CallParameters  vai para estado 41
+
+
+Estado 48
+
+   57 Expr: LPAR error . RPAR
+
+    RPAR  troca e vai para estado 80
+
+
+Estado 49
+
+   56 Expr: LPAR Expr . RPAR
+   58     | Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    COMMA       troca e vai para estado 53
+    RPAR        troca e vai para estado 81
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+
+Estado 50
+
+   49 Expr: PLUS Expr .
+   58     | Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    $default  redução com regra 49 (Expr)
+
+
+Estado 51
+
+   50 Expr: MINUS Expr .
+   58     | Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    $default  redução com regra 50 (Expr)
+
+
+Estado 52
+
+   51 Expr: NOT Expr .
+   58     | Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    $default  redução com regra 51 (Expr)
+
+
+Estado 53
+
+   59 Expr: Expr COMMA . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 82
+    CallParameters  vai para estado 41
+
+
+Estado 54
+
+   58 Expr: Expr ASSIGN . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 83
+    CallParameters  vai para estado 41
+
+
+Estado 55
+
+   60 Expr: Expr PLUS . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 84
+    CallParameters  vai para estado 41
+
+
+Estado 56
+
+   61 Expr: Expr MINUS . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 85
+    CallParameters  vai para estado 41
+
+
+Estado 57
+
+   62 Expr: Expr MUL . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 86
+    CallParameters  vai para estado 41
+
+
+Estado 58
+
+   63 Expr: Expr DIV . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 87
+    CallParameters  vai para estado 41
+
+
+Estado 59
+
+   64 Expr: Expr MOD . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 88
+    CallParameters  vai para estado 41
+
+
+Estado 60
+
+   65 Expr: Expr OR . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 89
+    CallParameters  vai para estado 41
+
+
+Estado 61
+
+   66 Expr: Expr AND . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 90
+    CallParameters  vai para estado 41
+
+
+Estado 62
+
+   67 Expr: Expr BITWISEAND . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 91
+    CallParameters  vai para estado 41
+
+
+Estado 63
+
+   68 Expr: Expr BITWISEOR . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 92
+    CallParameters  vai para estado 41
+
+
+Estado 64
+
+   69 Expr: Expr BITWISEXOR . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 93
+    CallParameters  vai para estado 41
+
+
+Estado 65
+
+   70 Expr: Expr EQ . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 94
+    CallParameters  vai para estado 41
+
+
+Estado 66
+
+   71 Expr: Expr NE . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 95
+    CallParameters  vai para estado 41
+
+
+Estado 67
+
+   72 Expr: Expr LE . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 96
+    CallParameters  vai para estado 41
+
+
+Estado 68
+
+   73 Expr: Expr GE . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 97
+    CallParameters  vai para estado 41
+
+
+Estado 69
+
+   74 Expr: Expr LT . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 98
+    CallParameters  vai para estado 41
+
+
+Estado 70
+
+   75 Expr: Expr GT . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 99
+    CallParameters  vai para estado 41
+
+
+Estado 71
+
+   76 CallParameters: CallParameters COMMA . Expr
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 100
+    CallParameters  vai para estado 41
+
+
+Estado 72
+
+   54 Expr: CallParameters RPAR .
+
+    $default  redução com regra 54 (Expr)
+
+
+Estado 73
+
+   19 ParameterList: ParameterList COMMA ParameterDeclaration .
+
+    $default  redução com regra 19 (ParameterList)
+
+
+Estado 74
+
+   17 FunctionDeclaration: TypeSpec ID LPAR ParameterList RPAR SEMI .
+
+    $default  redução com regra 17 (FunctionDeclaration)
+
+
+Estado 75
+
+   11 FunctionBody: LBRACE . DeclarationsAndStatements RBRACE
+   12             | LBRACE . RBRACE
+
+    error    troca e vai para estado 101
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    VOID     troca e vai para estado 2
+    CHAR     troca e vai para estado 3
+    INT      troca e vai para estado 4
+    SHORT    troca e vai para estado 5
+    DOUBLE   troca e vai para estado 6
+    SEMI     troca e vai para estado 102
+    LBRACE   troca e vai para estado 103
+    RBRACE   troca e vai para estado 104
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+    WHILE    troca e vai para estado 105
+    IF       troca e vai para estado 106
+    RETURN   troca e vai para estado 107
+
+    DeclarationsAndStatements  vai para estado 108
+    Declaration                vai para estado 109
+    TypeSpec                   vai para estado 110
+    Statement                  vai para estado 111
+    Expr                       vai para estado 112
+    CallParameters             vai para estado 41
+
+
+Estado 76
+
+   10 FunctionDefinition: TypeSpec ID LPAR ParameterList RPAR FunctionBody .
+
+    $default  redução com regra 10 (FunctionDefinition)
+
+
+Estado 77
+
+   55 Expr: ID LPAR error . RPAR
+
+    RPAR  troca e vai para estado 113
+
+
+Estado 78
+
+   53 Expr: ID LPAR RPAR .
+
+    $default  redução com regra 53 (Expr)
+
+
+Estado 79
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+   77 CallParameters: ID LPAR Expr .
+
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 77 (CallParameters)
+
+
+Estado 80
+
+   57 Expr: LPAR error RPAR .
+
+    $default  redução com regra 57 (Expr)
+
+
+Estado 81
+
+   56 Expr: LPAR Expr RPAR .
+
+    $default  redução com regra 56 (Expr)
+
+
+Estado 82
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   59     | Expr COMMA Expr .
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 59 (Expr)
+
+
+Estado 83
+
+   58 Expr: Expr . ASSIGN Expr
+   58     | Expr ASSIGN Expr .
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 58 (Expr)
+
+
+Estado 84
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   60     | Expr PLUS Expr .
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    MUL  troca e vai para estado 57
+    DIV  troca e vai para estado 58
+    MOD  troca e vai para estado 59
+
+    $default  redução com regra 60 (Expr)
+
+
+Estado 85
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   61     | Expr MINUS Expr .
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    MUL  troca e vai para estado 57
+    DIV  troca e vai para estado 58
+    MOD  troca e vai para estado 59
+
+    $default  redução com regra 61 (Expr)
+
+
+Estado 86
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   62     | Expr MUL Expr .
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    $default  redução com regra 62 (Expr)
+
+
+Estado 87
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   63     | Expr DIV Expr .
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    $default  redução com regra 63 (Expr)
+
+
+Estado 88
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   64     | Expr MOD Expr .
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    $default  redução com regra 64 (Expr)
+
+
+Estado 89
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   65     | Expr OR Expr .
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 65 (Expr)
+
+
+Estado 90
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   66     | Expr AND Expr .
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 66 (Expr)
+
+
+Estado 91
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   67     | Expr BITWISEAND Expr .
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS   troca e vai para estado 55
+    MINUS  troca e vai para estado 56
+    MUL    troca e vai para estado 57
+    DIV    troca e vai para estado 58
+    MOD    troca e vai para estado 59
+    EQ     troca e vai para estado 65
+    NE     troca e vai para estado 66
+    LE     troca e vai para estado 67
+    GE     troca e vai para estado 68
+    LT     troca e vai para estado 69
+    GT     troca e vai para estado 70
+
+    $default  redução com regra 67 (Expr)
+
+
+Estado 92
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   68     | Expr BITWISEOR Expr .
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    BITWISEAND  troca e vai para estado 62
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 68 (Expr)
+
+
+Estado 93
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   69     | Expr BITWISEXOR Expr .
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    BITWISEAND  troca e vai para estado 62
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 69 (Expr)
+
+
+Estado 94
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   70     | Expr EQ Expr .
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS   troca e vai para estado 55
+    MINUS  troca e vai para estado 56
+    MUL    troca e vai para estado 57
+    DIV    troca e vai para estado 58
+    MOD    troca e vai para estado 59
+    LE     troca e vai para estado 67
+    GE     troca e vai para estado 68
+    LT     troca e vai para estado 69
+    GT     troca e vai para estado 70
+
+    $default  redução com regra 70 (Expr)
+
+
+Estado 95
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   71     | Expr NE Expr .
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS   troca e vai para estado 55
+    MINUS  troca e vai para estado 56
+    MUL    troca e vai para estado 57
+    DIV    troca e vai para estado 58
+    MOD    troca e vai para estado 59
+    LE     troca e vai para estado 67
+    GE     troca e vai para estado 68
+    LT     troca e vai para estado 69
+    GT     troca e vai para estado 70
+
+    $default  redução com regra 71 (Expr)
+
+
+Estado 96
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   72     | Expr LE Expr .
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS   troca e vai para estado 55
+    MINUS  troca e vai para estado 56
+    MUL    troca e vai para estado 57
+    DIV    troca e vai para estado 58
+    MOD    troca e vai para estado 59
+
+    $default  redução com regra 72 (Expr)
+
+
+Estado 97
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   73     | Expr GE Expr .
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    PLUS   troca e vai para estado 55
+    MINUS  troca e vai para estado 56
+    MUL    troca e vai para estado 57
+    DIV    troca e vai para estado 58
+    MOD    troca e vai para estado 59
+
+    $default  redução com regra 73 (Expr)
+
+
+Estado 98
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   74     | Expr LT Expr .
+   75     | Expr . GT Expr
+
+    PLUS   troca e vai para estado 55
+    MINUS  troca e vai para estado 56
+    MUL    troca e vai para estado 57
+    DIV    troca e vai para estado 58
+    MOD    troca e vai para estado 59
+
+    $default  redução com regra 74 (Expr)
+
+
+Estado 99
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+   75     | Expr GT Expr .
+
+    PLUS   troca e vai para estado 55
+    MINUS  troca e vai para estado 56
+    MUL    troca e vai para estado 57
+    DIV    troca e vai para estado 58
+    MOD    troca e vai para estado 59
+
+    $default  redução com regra 75 (Expr)
+
+
+Estado 100
+
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+   76 CallParameters: CallParameters COMMA Expr .
+
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+    $default  redução com regra 76 (CallParameters)
+
+
+Estado 101
+
+   43 Statement: error . SEMI
+
+    SEMI  troca e vai para estado 114
+
+
+Estado 102
+
+   34 Statement: SEMI .
+
+    $default  redução com regra 34 (Statement)
+
+
+Estado 103
+
+   35 Statement: LBRACE . StatementList RBRACE
+   36          | LBRACE . RBRACE
+   42          | LBRACE . error RBRACE
+
+    error    troca e vai para estado 115
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    SEMI     troca e vai para estado 102
+    LBRACE   troca e vai para estado 103
+    RBRACE   troca e vai para estado 116
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+    WHILE    troca e vai para estado 105
+    IF       troca e vai para estado 106
+    RETURN   troca e vai para estado 107
+
+    Statement       vai para estado 117
+    StatementList   vai para estado 118
+    Expr            vai para estado 112
+    CallParameters  vai para estado 41
+
+
+Estado 104
+
+   12 FunctionBody: LBRACE RBRACE .
+
+    $default  redução com regra 12 (FunctionBody)
+
+
+Estado 105
+
+   39 Statement: WHILE . LPAR Expr RPAR Statement
+
+    LPAR  troca e vai para estado 119
+
+
+Estado 106
+
+   37 Statement: IF . LPAR Expr RPAR Statement
+   38          | IF . LPAR Expr RPAR Statement ELSE Statement
+
+    LPAR  troca e vai para estado 120
+
+
+Estado 107
+
+   40 Statement: RETURN . Expr SEMI
+   41          | RETURN . SEMI
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    SEMI     troca e vai para estado 121
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 122
+    CallParameters  vai para estado 41
+
+
+Estado 108
+
+   11 FunctionBody: LBRACE DeclarationsAndStatements . RBRACE
+   13 DeclarationsAndStatements: DeclarationsAndStatements . Declaration
+   14                          | DeclarationsAndStatements . Statement
+
+    error    troca e vai para estado 101
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    VOID     troca e vai para estado 2
+    CHAR     troca e vai para estado 3
+    INT      troca e vai para estado 4
+    SHORT    troca e vai para estado 5
+    DOUBLE   troca e vai para estado 6
+    SEMI     troca e vai para estado 102
+    LBRACE   troca e vai para estado 103
+    RBRACE   troca e vai para estado 123
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+    WHILE    troca e vai para estado 105
+    IF       troca e vai para estado 106
+    RETURN   troca e vai para estado 107
+
+    Declaration     vai para estado 124
+    TypeSpec        vai para estado 110
+    Statement       vai para estado 125
+    Expr            vai para estado 112
+    CallParameters  vai para estado 41
+
+
+Estado 109
+
+   16 DeclarationsAndStatements: Declaration .
+
+    $default  redução com regra 16 (DeclarationsAndStatements)
+
+
+Estado 110
+
+   22 Declaration: TypeSpec . DeclaratorList SEMI
+   23            | TypeSpec . error SEMI
+
+    error  troca e vai para estado 19
+    ID     troca e vai para estado 42
+
+    DeclaratorList  vai para estado 21
+    Declarator      vai para estado 22
+
+
+Estado 111
+
+   15 DeclarationsAndStatements: Statement .
+
+    $default  redução com regra 15 (DeclarationsAndStatements)
+
+
+Estado 112
+
+   33 Statement: Expr . SEMI
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    SEMI        troca e vai para estado 126
+    COMMA       troca e vai para estado 53
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+
+Estado 113
+
+   55 Expr: ID LPAR error RPAR .
+
+    $default  redução com regra 55 (Expr)
+
+
+Estado 114
+
+   43 Statement: error SEMI .
+
+    $default  redução com regra 43 (Statement)
+
+
+Estado 115
+
+   42 Statement: LBRACE error . RBRACE
+   43          | error . SEMI
+
+    SEMI    troca e vai para estado 114
+    RBRACE  troca e vai para estado 127
+
+
+Estado 116
+
+   36 Statement: LBRACE RBRACE .
+
+    $default  redução com regra 36 (Statement)
+
+
+Estado 117
+
+   45 StatementList: Statement .
+
+    $default  redução com regra 45 (StatementList)
+
+
+Estado 118
+
+   35 Statement: LBRACE StatementList . RBRACE
+   44 StatementList: StatementList . Statement
+
+    error    troca e vai para estado 101
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    SEMI     troca e vai para estado 102
+    LBRACE   troca e vai para estado 103
+    RBRACE   troca e vai para estado 128
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+    WHILE    troca e vai para estado 105
+    IF       troca e vai para estado 106
+    RETURN   troca e vai para estado 107
+
+    Statement       vai para estado 129
+    Expr            vai para estado 112
+    CallParameters  vai para estado 41
+
+
+Estado 119
+
+   39 Statement: WHILE LPAR . Expr RPAR Statement
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 130
+    CallParameters  vai para estado 41
+
+
+Estado 120
+
+   37 Statement: IF LPAR . Expr RPAR Statement
+   38          | IF LPAR . Expr RPAR Statement ELSE Statement
+
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+
+    Expr            vai para estado 131
+    CallParameters  vai para estado 41
+
+
+Estado 121
+
+   41 Statement: RETURN SEMI .
+
+    $default  redução com regra 41 (Statement)
+
+
+Estado 122
+
+   40 Statement: RETURN Expr . SEMI
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    SEMI        troca e vai para estado 132
+    COMMA       troca e vai para estado 53
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+
+Estado 123
+
+   11 FunctionBody: LBRACE DeclarationsAndStatements RBRACE .
+
+    $default  redução com regra 11 (FunctionBody)
+
+
+Estado 124
+
+   13 DeclarationsAndStatements: DeclarationsAndStatements Declaration .
+
+    $default  redução com regra 13 (DeclarationsAndStatements)
+
+
+Estado 125
+
+   14 DeclarationsAndStatements: DeclarationsAndStatements Statement .
+
+    $default  redução com regra 14 (DeclarationsAndStatements)
+
+
+Estado 126
+
+   33 Statement: Expr SEMI .
+
+    $default  redução com regra 33 (Statement)
+
+
+Estado 127
+
+   42 Statement: LBRACE error RBRACE .
+
+    $default  redução com regra 42 (Statement)
+
+
+Estado 128
+
+   35 Statement: LBRACE StatementList RBRACE .
+
+    $default  redução com regra 35 (Statement)
+
+
+Estado 129
+
+   44 StatementList: StatementList Statement .
+
+    $default  redução com regra 44 (StatementList)
+
+
+Estado 130
+
+   39 Statement: WHILE LPAR Expr . RPAR Statement
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    COMMA       troca e vai para estado 53
+    RPAR        troca e vai para estado 133
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+
+Estado 131
+
+   37 Statement: IF LPAR Expr . RPAR Statement
+   38          | IF LPAR Expr . RPAR Statement ELSE Statement
+   58 Expr: Expr . ASSIGN Expr
+   59     | Expr . COMMA Expr
+   60     | Expr . PLUS Expr
+   61     | Expr . MINUS Expr
+   62     | Expr . MUL Expr
+   63     | Expr . DIV Expr
+   64     | Expr . MOD Expr
+   65     | Expr . OR Expr
+   66     | Expr . AND Expr
+   67     | Expr . BITWISEAND Expr
+   68     | Expr . BITWISEOR Expr
+   69     | Expr . BITWISEXOR Expr
+   70     | Expr . EQ Expr
+   71     | Expr . NE Expr
+   72     | Expr . LE Expr
+   73     | Expr . GE Expr
+   74     | Expr . LT Expr
+   75     | Expr . GT Expr
+
+    COMMA       troca e vai para estado 53
+    RPAR        troca e vai para estado 134
+    ASSIGN      troca e vai para estado 54
+    PLUS        troca e vai para estado 55
+    MINUS       troca e vai para estado 56
+    MUL         troca e vai para estado 57
+    DIV         troca e vai para estado 58
+    MOD         troca e vai para estado 59
+    OR          troca e vai para estado 60
+    AND         troca e vai para estado 61
+    BITWISEAND  troca e vai para estado 62
+    BITWISEOR   troca e vai para estado 63
+    BITWISEXOR  troca e vai para estado 64
+    EQ          troca e vai para estado 65
+    NE          troca e vai para estado 66
+    LE          troca e vai para estado 67
+    GE          troca e vai para estado 68
+    LT          troca e vai para estado 69
+    GT          troca e vai para estado 70
+
+
+Estado 132
+
+   40 Statement: RETURN Expr SEMI .
+
+    $default  redução com regra 40 (Statement)
+
+
+Estado 133
+
+   39 Statement: WHILE LPAR Expr RPAR . Statement
+
+    error    troca e vai para estado 101
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    SEMI     troca e vai para estado 102
+    LBRACE   troca e vai para estado 103
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+    WHILE    troca e vai para estado 105
+    IF       troca e vai para estado 106
+    RETURN   troca e vai para estado 107
+
+    Statement       vai para estado 135
+    Expr            vai para estado 112
+    CallParameters  vai para estado 41
+
+
+Estado 134
+
+   37 Statement: IF LPAR Expr RPAR . Statement
+   38          | IF LPAR Expr RPAR . Statement ELSE Statement
+
+    error    troca e vai para estado 101
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    SEMI     troca e vai para estado 102
+    LBRACE   troca e vai para estado 103
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+    WHILE    troca e vai para estado 105
+    IF       troca e vai para estado 106
+    RETURN   troca e vai para estado 107
+
+    Statement       vai para estado 136
+    Expr            vai para estado 112
+    CallParameters  vai para estado 41
+
+
+Estado 135
+
+   39 Statement: WHILE LPAR Expr RPAR Statement .
+
+    $default  redução com regra 39 (Statement)
+
+
+Estado 136
+
+   37 Statement: IF LPAR Expr RPAR Statement .
+   38          | IF LPAR Expr RPAR Statement . ELSE Statement
+
+    ELSE  troca e vai para estado 137
+
+    $default  redução com regra 37 (Statement)
+
+
+Estado 137
+
+   38 Statement: IF LPAR Expr RPAR Statement ELSE . Statement
+
+    error    troca e vai para estado 101
+    CHRLIT   troca e vai para estado 32
+    INTLIT   troca e vai para estado 33
+    REALLIT  troca e vai para estado 34
+    ID       troca e vai para estado 35
+    SEMI     troca e vai para estado 102
+    LBRACE   troca e vai para estado 103
+    LPAR     troca e vai para estado 36
+    PLUS     troca e vai para estado 37
+    MINUS    troca e vai para estado 38
+    NOT      troca e vai para estado 39
+    WHILE    troca e vai para estado 105
+    IF       troca e vai para estado 106
+    RETURN   troca e vai para estado 107
+
+    Statement       vai para estado 138
+    Expr            vai para estado 112
+    CallParameters  vai para estado 41
+
+
+Estado 138
+
+   38 Statement: IF LPAR Expr RPAR Statement ELSE Statement .
+
+    $default  redução com regra 38 (Statement)

@@ -1,0 +1,42 @@
+
+******* META 1 *******
+lex uccompiler.l
+clang-3.9 -o uccompiler lex.yy.c
+./uccompiler
+
+------------------
+
+./uccompiler < Input | diff OutputEsperado -
+
+-------------------
+
+./test_sh.sh uccompiler
+./test_sh.sh uccompiler -args="-l" 
+./test_sh.sh uccompiler -args="-e1" 
+./test_sh.sh uccompiler -args="-l" -diff
+./test_sh.sh uccompiler -args="-e1 -l"
+./test_sh.sh uccompiler -lex="compiler.l" -args="-l" -i=../tests/input -o=../tests/output
+*******************************
+
+
+
+
+******* META 2 *******
+lex uccompiler.l
+yacc -d uccompiler.y		// ou -v -g
+cc -o uccompiler y.tab.c lex.yy.c functions.c
+./uccompiler
+./uccompiler -t < INPUT.UC
+*******************************
+
+
+
+
+
+******* NOTA *******
+yacc -d omg.y				// Normal
+yacc -g omg.y				// Gerar grafo
+dot -Tps y.dot -o y.ps		// Grafo -> imagem
+yacc -v omg.y				// Gerar Fich com Info Detalhada
+cc -o uccompiler y.tab.c lex.yy.c -lm			// -lm para linkar lib math
+*******************************

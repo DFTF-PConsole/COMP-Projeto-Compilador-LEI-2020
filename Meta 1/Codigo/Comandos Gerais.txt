@@ -1,0 +1,17 @@
+lex uccompiler.l
+clang-3.9 -o uccompiler lex.yy.c
+./uccompiler
+
+------------------
+
+./uccompiler < Input | diff OutputEsperado -
+
+-------------------
+
+./test_sh.sh uccompiler
+./test_sh.sh uccompiler -args="-l" 
+./test_sh.sh uccompiler -args="-e1" 
+./test_sh.sh uccompiler -args="-l" -diff
+./test_sh.sh uccompiler -args="-e1 -l"
+./test_sh.sh uccompiler -lex="compiler.l" -args="-l" -i=../tests/input -o=../tests/output
+

@@ -1,0 +1,27 @@
+CHRLIT('a')
+ID(asdasd)
+CHRLIT('\n')
+CHRLIT('\t')
+CHRLIT('\\')
+CHRLIT('\'')
+CHRLIT('\"')
+CHRLIT('\1')
+Line 8, col 1: invalid char constant ('\a')
+Line 9, col 1: invalid char constant ('ç')
+Line 10, col 1: unterminated char constant
+Line 11, col 1: unterminated char constant
+Line 12, col 1: unterminated char constant
+CHRLIT('\12')
+CHRLIT('\755')
+Line 15, col 1: invalid char constant ('\999')
+ID(AAA)
+Line 16, col 1: unterminated char constant
+Line 17, col 1: unterminated char constant
+Line 18, col 1: invalid char constant ('aaaaaa')
+Line 19, col 1: invalid char constant ('\\\\')
+ID(asdadsadsa)
+CHRLIT('\\')
+Line 21, col 1: unterminated char constant
+CHRLIT('a')
+ID(asdasdad)
+CHRLIT('\\')

@@ -1,0 +1,24 @@
+a; b; +; $
+
+. a; b; +; $						SHIFT
+a. ; b; +; $						SHIFT
+a; . b; +; $						REDUCE (FunctionsAndDeclarations -> error SEMI)
+FunctionsAndDeclarations. b; +; $	SHIFT
+FunctionsAndDeclarations b .; +; $	SHIFT
+FunctionsAndDeclarations b; . +; $	REDUCE (FunctionsAndDeclarations -> FunctionsAndDeclarations error SEMI)
+FunctionsAndDeclarations. +; $		SHIFT
+FunctionsAndDeclarations + .; $		SHIFT
+FunctionsAndDeclarations +; . $		REDUCE
+FunctionsAndDeclarations . $		ACCEPT 
+
+Start							: FunctionsAndDeclarations
+								;
+FunctionsAndDeclarations 		: FunctionsAndDeclarations FunctionDefinition
+								| FunctionsAndDeclarations FunctionDeclaration
+								| FunctionsAndDeclarations Declaration
+								| FunctionsAndDeclarations error SEMI
+								| FunctionDefinition
+								| FunctionDeclaration
+								| Declaration
+								| error SEMI
+								;
